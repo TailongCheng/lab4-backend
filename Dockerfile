@@ -10,6 +10,6 @@ COPY flaskapp.py .
 # Run command to ensure the Flask framework is present in the container.
 RUN pip3 install Flask
  
-# Expose port 80 for the application
-EXPOSE 80
+# Expose port 8080 for the application
+EXPOSE 8080
 CMD ["python", "flaskapp.py"]
