@@ -1,5 +1,5 @@
 steps:
-  # Build the Docker image  
+  # Build the Docker image
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-t', 'us-central1-docker.pkg.dev/assignment2-418411/cheng-repo/flaskapp:${COMMIT_SHA}', '.']
   # Push the Docker image to the artifact registry
@@ -12,7 +12,7 @@ steps:
       - '-c'
       - |
         # SSH into the existing instance
-        mkdir -p ~/root/.ssh
+        sudo mkdir -p ~/root/.ssh
         gcloud secrets versions access latest --secret=cloud-build-ssh-key > ~/root/.ssh/id_rsa
         chmod 600 ~/root/.ssh/id_rsa
         gcloud secrets versions access latest --secret=cloud-build-ssh-key-pub > ~/root/.ssh/id_rsa.pub
