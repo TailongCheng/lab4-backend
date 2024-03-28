@@ -11,5 +11,5 @@ COPY flaskapp.py .
 RUN pip install Flask
  
 # Expose port 8080 for the application
-EXPOSE 8080
+EXPOSE 80
 CMD ["python", "flaskapp.py"]
