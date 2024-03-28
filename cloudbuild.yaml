@@ -7,7 +7,6 @@ steps:
     args: ['push', 'us-central1-docker.pkg.dev/assignment2-418411/cheng-repo/flaskapp:${COMMIT_SHA}']
   # Deploy the Docker container to Google Compute Engine instance
   - name: 'gcr.io/cloud-builders/gcloud'
-  - name: 'gcr.io/cloud-builders/gcloud'
     entrypoint: 'bash'
     args:
       - '-c'
