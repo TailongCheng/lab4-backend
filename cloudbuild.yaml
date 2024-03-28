@@ -5,10 +5,9 @@ steps:
   # Push the Docker image to the artifact registry
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'us-central1-docker.pkg.dev/assignment2-418411/cheng-repo/flaskapp:${COMMIT_SHA}']
-
-  # Deploy the Docker container to Google Cloud Run
-  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-    args: [ compute, instance, managed, rolling-action, restart, --zone=us-central1-a ]
+  # Deploy the Docker container to Google Compute Engine instance
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args: ['compute', 'ssh', 'vm-container', '--zone=us-central1-a', '--command="docker run -dp 8080:8080 us-central1-docker.pkg.dev/assignment2-418411/cheng-repo/flaskapp:${COMMIT_SHA}"']
 
 options:
   # Set defaultLogsBucketBehavior to REGIONAL_USER_OWNED_BUCKET
