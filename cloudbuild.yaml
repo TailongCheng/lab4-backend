@@ -12,12 +12,12 @@ steps:
       - '-c'
       - |
         # SSH into the existing instance
-        mkdir -p ~/root/.ssh && \\
-        gcloud secrets versions access latest --secret=cloud-build-ssh-key > ~/root/.ssh/id_rsa && \\
-        chmod 600 ~/root/.ssh/id_rsa && \\
-        gcloud secrets versions access latest --secret=cloud-build-ssh-key-pub > ~/root/.ssh/id_rsa.pub && \\
-        chmod 600 ~/root/.ssh/id_rsa.pub && \\
-        gcloud compute ssh server_name --ssh-key-file=~/root/.ssh/id_rsa --zone=us-central1-a --command="
+        mkdir -p ~/root/.ssh
+        gcloud secrets versions access latest --secret=cloud-build-ssh-key > ~/root/.ssh/id_rsa
+        chmod 600 ~/root/.ssh/id_rsa
+        gcloud secrets versions access latest --secret=cloud-build-ssh-key-pub > ~/root/.ssh/id_rsa.pub
+        chmod 600 ~/root/.ssh/id_rsa.pub
+        gcloud compute ssh vm-container --ssh-key-file=~/root/.ssh/id_rsa --zone=us-central1-a --command="
           # Stop the currently running container if it exists
           if docker ps -a | grep -q 'flaskapp'; then
             docker stop flaskapp
