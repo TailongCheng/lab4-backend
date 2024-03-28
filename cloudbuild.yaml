@@ -12,7 +12,12 @@ steps:
       - '-c'
       - |
         # SSH into the existing instance
-        gcloud compute ssh vm-container --zone=us-central1-a --command="
+        mkdir -p ~/root/.ssh && \\
+        gcloud secrets versions access latest --secret=cloud-build-ssh-key > ~/root/.ssh/id_rsa && \\
+        chmod 600 ~/root/.ssh/id_rsa && \\
+        gcloud secrets versions access latest --secret=cloud-build-ssh-key-pub > ~/root/.ssh/id_rsa.pub && \\
+        chmod 600 ~/root/.ssh/id_rsa.pub && \\
+        gcloud compute ssh server_name --ssh-key-file=~/root/.ssh/id_rsa --zone=us-central1-a --command="
           # Stop the currently running container if it exists
           if docker ps -a | grep -q 'flaskapp'; then
             docker stop flaskapp
@@ -21,7 +26,7 @@ steps:
           # Run the new container
           docker run -dp 8080:8080 --name flaskapp us-central1-docker.pkg.dev/assignment2-418411/cheng-repo/flaskapp:${COMMIT_SHA}
         "
-          
+        
 options:
   # Set defaultLogsBucketBehavior to REGIONAL_USER_OWNED_BUCKET
   # defaultLogsBucket: 'gs://your-build-logs-bucket' # Replace with your build logs bucket
