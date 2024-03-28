@@ -20,6 +20,7 @@ steps:
           fi
           # Run the new container
           docker run -dp 8080:8080 --name flaskapp us-central1-docker.pkg.dev/assignment2-418411/cheng-repo/flaskapp:${COMMIT_SHA}
+        "
           
 options:
   # Set defaultLogsBucketBehavior to REGIONAL_USER_OWNED_BUCKET
