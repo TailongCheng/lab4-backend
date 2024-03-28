@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def hello_cloud():
-  return 'Hello Cloud!'
+  return 'Hello Cloud! From Tailong Cheng!'
 
 # Without port=8080, the docker container ip works, but GCP VM local ip and external ip doesnt work.
 if __name__ == "__main__":
